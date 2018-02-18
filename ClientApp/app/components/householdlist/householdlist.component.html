@@ -1,0 +1,23 @@
+<h1>List of Households</h1>
+
+<p *ngIf="!households"><em>Loading...</em></p>
+
+<table class='table' *ngIf="households">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Code</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let household of households">
+            <td>{{ household.id }}</td>
+            <td>{{ household.name }}</td>
+            <td>{{ household.code }}</td>
+        </tr>
+        <tr>
+            <td colspan="3">We would put our 'add household' ui stuff here.</td>
+        </tr>
+    </tbody>
+</table>
