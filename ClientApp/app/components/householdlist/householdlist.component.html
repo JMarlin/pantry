@@ -15,9 +15,30 @@
             <td>{{ household.id }}</td>
             <td>{{ household.name }}</td>
             <td>{{ household.code }}</td>
+            <td>
+                <input class="household-input"
+                       type="button"
+                       (click)="requestDeleteHousehold(household.id)"
+                       value = "Delete" />
+            </td>
         </tr>
         <tr>
-            <td colspan="3">We would put our 'add household' ui stuff here.</td>
+            <td colspan="3">
+                <input class="household-input"
+                       type="text"
+                       [(ngModel)]="newHousehold.name"
+                       placeholder="New Household Name" />
+                <input class="household-input" 
+                       type="text"
+                       (change)="fixupCodeLength()"
+                       (keyup)="fixupCodeLength()"
+                       [(ngModel)]="newHousehold.code"
+                       placeholder="New Household Code" />
+                <input class="household-input" 
+                       type="button"
+                       (click)="requestCreateHousehold()"
+                       value="Add Household" />
+            </td>
         </tr>
     </tbody>
 </table>

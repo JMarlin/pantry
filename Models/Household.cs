@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace pantry.Models {
 
-    [Table("households")]
+    [Table("household")]
     public class Household {
 
         [Column]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         [Column("name")]

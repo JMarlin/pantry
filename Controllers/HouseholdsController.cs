@@ -19,5 +19,27 @@ namespace pantry.Controllers
             
             return db.Households; 
         }
+
+        [HttpPut("[action]")]
+        public IActionResult Add([FromBody] Models.Household household)
+        {
+
+            var db = new Models.PantryDBContext();
+            db.Households.Add(household);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpDelete("[action]/{id}")]
+        public IActionResult Delete(int id)
+        {
+
+            var db = new Models.PantryDBContext();
+            db.Households.RemoveRange(db.Households.Where(h => h.id == id));
+            db.SaveChanges();
+
+            return Ok();
+        }
     }
 }
