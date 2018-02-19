@@ -8,6 +8,7 @@ namespace pantry.Models {
     public class Household {
 
         [Column]
+        [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
@@ -16,5 +17,7 @@ namespace pantry.Models {
 
         [Column("code")]
         public string Code { get; set; }
+
+        public ICollection<FamilyMember> FamilyMembers { get; set; }
     }
 }

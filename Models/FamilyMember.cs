@@ -21,9 +21,9 @@ namespace pantry.Models {
         public string LastName { get; set; }
 
         [Column("householdid")]
-        [ForeignKey("household")]
         private int _household_id { get; set; }
 
-        public ICollection<Household> Household { get; set; }
+        [ForeignKey("_household_id")]
+        public Household Household { get; set; }
     }
 }

@@ -30,6 +30,7 @@ import { HouseholdListComponent } from './components/householdlist/householdlist
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'households', component: HouseholdListComponent },
+            { path: 'household-details/:id', component: HouseholdDetailsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

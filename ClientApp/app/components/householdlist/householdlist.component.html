@@ -12,17 +12,19 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let household of households">
-            <td>{{ household.id }}</td>
-            <td>{{ household.name }}</td>
-            <td>{{ household.code }}</td>
-            <td>
-                <input class="household-input"
-                       type="button"
-                       (click)="requestDeleteHousehold(household.id)"
-                       value = "Delete" />
-            </td>
-        </tr>
+        <a [routerLink]="['/household-details', household.id]">
+            <tr *ngFor="let household of households">
+                <td>{{ household.id }}</td>
+                <td>{{ household.name }}</td>
+                <td>{{ household.code }}</td>
+                <td>
+                    <input class="household-input"
+                        type="button"
+                        (click)="requestDeleteHousehold(household.id)"
+                        value = "Delete" />
+                </td>
+            </tr>
+        </a>
         <tr>
             <td colspan="4">
                 <input class="household-input"
