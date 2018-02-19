@@ -13,7 +13,7 @@ namespace pantry.Models {
         }
 
         public DbSet<Household> Households { get; set; }
-        //public DbSet<FamilyMember> FamilyMembers { get; set; }
+        public DbSet<FamilyMember> FamilyMembers { get; set; }
         //public DbSet<AppSettings> AppSettingses { get; set; }
         //public DbSet<GoodType> GoodTypes { get; set; }
         //public DbSet<GoodInstance> GoodInstances { get; set; }
