@@ -20,14 +20,18 @@ namespace pantry.Controllers
             return db.Households.Where(h => h.id == id).FirstOrDefault().FamilyMembers; 
         }
 
-        [HttpPut("[action]/id")]
+        [HttpPut("[action]/{id}")]
         public IActionResult AddFamilyMember(int id, [FromBody] Models.FamilyMember family_member)
         {
-
-            Console.WriteLine(id);
-            Console.WriteLine(family_member.FirstName);
             var db = new Models.PantryDBContext();
-            db.Households.Where(h => h.id == id).FirstOrDefault().FamilyMembers.Add(family_member);
+            var households = db.Households.Where(h => h.id == id);
+
+            if(households.Count() < 1)
+                return NotFound();
+
+            family_member.HouseholdId = id;
+            family_member.Household = households.First();
+            db.FamilyMembers.Add(family_member);
             db.SaveChanges();
 
             return Ok();

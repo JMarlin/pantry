@@ -22,9 +22,9 @@ namespace pantry.Models {
         public string LastName { get; set; }
 
         [Column("householdid")]
-        private int _household_id { get; set; }
+        public int HouseholdId { get; set; }
 
-        [ForeignKey("_household_id")]
+        [ForeignKey("HouseholdId")]
         public Household Household { get; set; }
     }
 }

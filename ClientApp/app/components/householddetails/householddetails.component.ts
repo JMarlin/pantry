@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HouseholdDetailsComponent {
 
     //public household: HouseholdListComponent.Household;
-    public familyaMembers: FamilyMember[];
+    public familyMembers: FamilyMember[];
     public newFamilyMember: FamilyMember;
     private household_id: number;
     private http: Http;
@@ -22,13 +22,13 @@ export class HouseholdDetailsComponent {
 
         this.http = http;
         this.baseUrl = baseUrl;
-        this.initNewFamilyMember();
     }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.household_id = +params['id'];
 
+            this.initNewFamilyMember();
             this.refreshFamilyMemberList();
         });
     }
@@ -40,7 +40,7 @@ export class HouseholdDetailsComponent {
     private refreshFamilyMemberList() {
 
         this.http.get(this.baseUrl + 'api/Household/ListFamilyMembers/' + this.household_id).subscribe(result => {
-            this.familyaMembers = result.json() as FamilyMember[];
+            this.familyMembers = result.json() as FamilyMember[];
         }, error => console.error(error));
     }
 
