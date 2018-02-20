@@ -12,7 +12,7 @@ namespace pantry.Controllers
     {
 
         [HttpGet("[action]/{id}")]
-        public IEnumerable<Models.Household> FamilyMembers(int id)
+        public IEnumerable<Models.FamilyMember> ListFamilyMembers(int id)
         {
 
             var db = new Models.PantryDBContext();
@@ -21,9 +21,11 @@ namespace pantry.Controllers
         }
 
         [HttpPut("[action]/id")]
-        public IActionResult AddFamilyMember([FromBody] Models.FamilyMember family_member, int id)
+        public IActionResult AddFamilyMember(int id, [FromBody] Models.FamilyMember family_member)
         {
 
+            Console.WriteLine(id);
+            Console.WriteLine(family_member.FirstName);
             var db = new Models.PantryDBContext();
             db.Households.Where(h => h.id == id).FirstOrDefault().FamilyMembers.Add(family_member);
             db.SaveChanges();

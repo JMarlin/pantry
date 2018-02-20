@@ -16,19 +16,30 @@ export class HouseholdDetailsComponent {
     private household_id: number;
     private http: Http;
     private baseUrl: string;
+    private sub: any;
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string, private _Activatedroute:ActivatedRoute) {
+    constructor(http: Http, @Inject('BASE_URL') baseUrl: string, private route: ActivatedRoute) {
 
-        this.household_id = this._Activatedroute.snapshot.params['id'];
         this.http = http;
         this.baseUrl = baseUrl;
         this.initNewFamilyMember();
-        this.refreshFamilyMemberList();
+    }
+
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.household_id = +params['id'];
+
+            this.refreshFamilyMemberList();
+        });
+    }
+        
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
     private refreshFamilyMemberList() {
 
-        this.http.get(this.baseUrl + 'api/Households/List').subscribe(result => {
+        this.http.get(this.baseUrl + 'api/Household/ListFamilyMembers/' + this.household_id).subscribe(result => {
             this.familyaMembers = result.json() as FamilyMember[];
         }, error => console.error(error));
     }

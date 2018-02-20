@@ -33,7 +33,8 @@ export class HouseholdListComponent {
         this.newHousehold = <Household> {  
             id: 0,
             name: "",
-            code: ""
+            code: "",
+            familyMembers: null
         };
     }
 
@@ -63,9 +64,10 @@ export class HouseholdListComponent {
         }, error => console.error(error));
     }
 }
-
+  
 interface Household {
     id: number;
     name: string;
     code: string;
+    familyMembers: Array<object> | null;
 }

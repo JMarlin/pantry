@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { HouseholdListComponent } from './components/householdlist/householdlist.component';
+import { HouseholdDetailsComponent } from './components/householddetails/householddetails.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { HouseholdListComponent } from './components/householdlist/householdlist
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        HouseholdListComponent
+        HouseholdListComponent,
+        HouseholdDetailsComponent
     ],
     imports: [
         CommonModule,

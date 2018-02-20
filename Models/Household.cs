@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace pantry.Models {
@@ -18,6 +20,6 @@ namespace pantry.Models {
         [Column("code")]
         public string Code { get; set; }
 
-        public ICollection<FamilyMember> FamilyMembers { get; set; }
+        public List<FamilyMember> FamilyMembers { get; set; }
     }
 }
