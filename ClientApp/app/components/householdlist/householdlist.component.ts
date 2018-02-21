@@ -95,6 +95,7 @@ export class Household {
 
     public loadGoodTypes(http: Http, baseUrl: string) {
         http.get(baseUrl + 'api/Household/ListGoodTypes/' + this.id).subscribe(result => {
+            debugger;
             var temp_arr = result.json() as any[];
             this.goodTypes = temp_arr.map(input => new GoodType().from(input));
         });
