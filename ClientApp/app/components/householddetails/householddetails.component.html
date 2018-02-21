@@ -49,7 +49,7 @@
         <tbody>
             <tr *ngFor="let goodtype of household.goodTypes">
                 <td>{{ goodtype.name }}</td>
-                <td>{{ goodtype.defaultmeasure }}</td>
+                <td>{{ goodtype.defaultMeasure }}</td>
             </tr>
         </tbody>
     </table>
@@ -60,7 +60,7 @@
            placeholder="New Good Type Name" />
     <input class="household-input" 
            type="text"
-           [(ngModel)]="newGoodType.defaultmeasure"
+           [(ngModel)]="newGoodType.defaultMeasure"
            placeholder="New Good Type Measure Unit" />
     <input class="household-input" 
            type="button"
