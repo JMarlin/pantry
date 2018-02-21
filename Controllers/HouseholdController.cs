@@ -16,8 +16,8 @@ namespace pantry.Controllers
         {
 
             var db = new Models.PantryDBContext();
-            
-            return db.Households.Where(h => h.id == id).FirstOrDefault().FamilyMembers; 
+
+            return db.FamilyMembers.Where(fm => fm.HouseholdId == id);
         }
 
         [HttpPut("[action]/{id}")]

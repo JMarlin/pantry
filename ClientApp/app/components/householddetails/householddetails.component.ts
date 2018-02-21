@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
+import { Household } from '../householdlist/householdlist.component';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HouseholdDetailsComponent {
 
     //public household: HouseholdListComponent.Household;
-    public familyMembers: FamilyMember[];
+    public household: Household;
     public newFamilyMember: FamilyMember;
     private household_id: number;
     private http: Http;
@@ -29,7 +30,7 @@ export class HouseholdDetailsComponent {
             this.household_id = +params['id'];
 
             this.initNewFamilyMember();
-            this.refreshFamilyMemberList();
+            this.loadHouseholdDetails();
         });
     }
         
@@ -37,42 +38,45 @@ export class HouseholdDetailsComponent {
         this.sub.unsubscribe();
     }
 
-    private refreshFamilyMemberList() {
+    private loadHouseholdDetails() {
 
-        this.http.get(this.baseUrl + 'api/Household/ListFamilyMembers/' + this.household_id).subscribe(result => {
-            this.familyMembers = result.json() as FamilyMember[];
+        this.http.get(this.baseUrl + 'api/Households/GetSingle/' + this.household_id).subscribe(result => {
+            this.household = new Household().from(result.json());
+            this.household.loadFamilyMembers(this.http, this.baseUrl);
         }, error => console.error(error));
     }
 
     private initNewFamilyMember() {
 
-        this.newFamilyMember = <FamilyMember> {  
-            id: 0,
-            firstName: "",
-            lastName: ""
-        };
+        this.newFamilyMember = new FamilyMember();
     }
 
     public requestCreateFamilyMember() {
 
         //Link newHousehold to the UI and send its info off to api/Households/Add
         this.http.put(this.baseUrl + 'api/Household/AddFamilyMember/' + this.household_id, this.newFamilyMember).subscribe(result => {
-            this.refreshFamilyMemberList();
+            this.household.loadFamilyMembers(this.http, this.baseUrl);
         }, error => console.error(error));
 
         this.initNewFamilyMember();
     }
 
-    public requestDeleteFamilyMember(id: number) {
+    public requestDeleteFamilyMember(family_member: FamilyMember) {
 
-        this.http.delete(this.baseUrl + 'api/Households/DeleteFamilyMember/' + id).subscribe(result => {
-            this.refreshFamilyMemberList();
+        this.http.delete(this.baseUrl + 'api/Household/DeleteFamilyMember/' + family_member.id).subscribe(result => {
+            this.household.loadFamilyMembers(this.http, this.baseUrl);
         }, error => console.error(error));
     }
 }
 
-interface FamilyMember {
+export class FamilyMember {
     id: number;
     firstName: string;
     lastName: string;
+
+    constructor() {
+        this.id = 0;
+        this.firstName = "";
+        this.lastName = "";
+    }
 }

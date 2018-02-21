@@ -20,6 +20,15 @@ namespace pantry.Controllers
             return db.Households; 
         }
 
+        [HttpGet("[action]/{id}")]
+        public Models.Household GetSingle(int id)
+        {
+
+            var db = new Models.PantryDBContext();
+            
+            return db.Households.Where(h => h.id == id).FirstOrDefault(); 
+        }
+
         [HttpPut("[action]")]
         public IActionResult Add([FromBody] Models.Household household)
         {

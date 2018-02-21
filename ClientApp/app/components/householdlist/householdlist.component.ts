@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { FamilyMember } from '../householddetails/householddetails.component';
 
 @Component({
     selector: 'householdlist',
@@ -30,12 +31,7 @@ export class HouseholdListComponent {
 
     private initNewHousehold() {
 
-        this.newHousehold = <Household> {  
-            id: 0,
-            name: "",
-            code: "",
-            familyMembers: null
-        };
+        this.newHousehold = new Household();
     }
 
     public fixupCodeLength() {
@@ -65,9 +61,32 @@ export class HouseholdListComponent {
     }
 }
   
-interface Household {
+export class Household {
     id: number;
     name: string;
     code: string;
-    familyMembers: Array<object> | null;
+    familyMembers: Array<FamilyMember> | null;
+
+    constructor() {
+
+        this.id = 0;
+        this.name = "";
+        this.code = "";
+        this.familyMembers = null;
+    }
+
+    public from(household: Household) {
+
+        this.id = household.id;
+        this.name = household.name;
+        this.code = household.code;
+
+        return this;
+    }
+
+    public loadFamilyMembers(http: Http, baseUrl: string) {
+        http.get(baseUrl + 'api/Household/ListFamilyMembers/' + this.id).subscribe(result => {
+            this.familyMembers = result.json() as FamilyMember[];
+        });
+    }
 }

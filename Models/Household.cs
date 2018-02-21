@@ -19,7 +19,5 @@ namespace pantry.Models {
 
         [Column("code")]
         public string Code { get; set; }
-
-        public List<FamilyMember> FamilyMembers { get; set; }
     }
 }

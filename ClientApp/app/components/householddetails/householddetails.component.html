@@ -1,5 +1,5 @@
-<h1>List of Households</h1>
-
+<h1 *ngIf="household">{{ household.name }} Household Details</h1>
+<h2>Family Members</h2>
 <table class='table'>
     <thead>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let familyMember of familyMembers">
+        <tr *ngFor="let familyMember of household.familyMembers">
             <td>{{ familyMember.id }}</td>
             <td>{{ familyMember.firstName }}</td>
             <td>{{ familyMember.lastName }}</td>
@@ -21,21 +21,18 @@
                        value = "Delete" />
             </td>
         </tr>
-        <tr>
-            <td colspan="4">
-                <input class="household-input"
-                       type="text"
-                       [(ngModel)]="newFamilyMember.firstName"
-                       placeholder="New Family Member Name" />
-                <input class="household-input" 
-                       type="text"
-                       [(ngModel)]="newFamilyMember.lastName"
-                       placeholder="New Family Member Last Name" />
-                <input class="household-input" 
-                       type="button"
-                       (click)="requestCreateFamilyMember()"
-                       value="Add Family Member" />
-            </td>
-        </tr>
     </tbody>
 </table>
+
+<input class="household-input"
+        type="text"
+        [(ngModel)]="newFamilyMember.firstName"
+        placeholder="New Family Member Name" />
+<input class="household-input" 
+        type="text"
+        [(ngModel)]="newFamilyMember.lastName"
+        placeholder="New Family Member Last Name" />
+<input class="household-input" 
+        type="button"
+        (click)="requestCreateFamilyMember()"
+        value="Add Family Member" />
