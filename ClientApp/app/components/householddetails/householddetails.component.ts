@@ -14,6 +14,7 @@ export class HouseholdDetailsComponent {
     //public household: HouseholdListComponent.Household;
     public household: Household;
     public newFamilyMember: FamilyMember;
+    public newGoodType: GoodType;
     private household_id: number;
     private http: Http;
     private baseUrl: string;
@@ -43,12 +44,18 @@ export class HouseholdDetailsComponent {
         this.http.get(this.baseUrl + 'api/Households/GetSingle/' + this.household_id).subscribe(result => {
             this.household = new Household().from(result.json());
             this.household.loadFamilyMembers(this.http, this.baseUrl);
+            this.household.loadGoodTypes(this.http, this.baseUrl);
         }, error => console.error(error));
     }
 
     private initNewFamilyMember() {
 
         this.newFamilyMember = new FamilyMember();
+    }
+
+    private initNewGoodType() {
+
+        this.newGoodType = new GoodType();
     }
 
     public requestCreateFamilyMember() {
@@ -61,11 +68,41 @@ export class HouseholdDetailsComponent {
         this.initNewFamilyMember();
     }
 
+    public requestCreateFamilyMember() {
+        
+        this.http.put(this.baseUrl + 'api/Household/AddGoodType/' + this.household_id, this.newGoodType).subscribe(result => {
+            this.household.loadGoodTypes(this.http, this.baseUrl);
+        }, error => console.error(error));
+
+        this.initNewGoodType();
+    }
+
     public requestDeleteFamilyMember(family_member: FamilyMember) {
 
         this.http.delete(this.baseUrl + 'api/Household/DeleteFamilyMember/' + family_member.id).subscribe(result => {
             this.household.loadFamilyMembers(this.http, this.baseUrl);
         }, error => console.error(error));
+    }
+}
+
+export class GoodType {
+    id: number;
+    name: string;
+    defaultmeasure: string;
+
+    constructor() {
+        this.id = 0;
+        this.name = "";
+        this.defaultmeasure = "";
+    }
+
+    public from(input: any) {
+
+        this.id = input.id;
+        this.name = input.name;
+        this.defaultmeasure = input.defaultmeasure;
+
+        return this;
     }
 }
 
@@ -78,5 +115,14 @@ export class FamilyMember {
         this.id = 0;
         this.firstName = "";
         this.lastName = "";
+    }
+
+    public from(input: any) {
+
+        this.id = input.id;
+        this.firstName = input.firstName;
+        this.lastName = input.lastName;
+
+        return this;
     }
 }

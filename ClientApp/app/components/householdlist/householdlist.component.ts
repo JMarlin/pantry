@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { FamilyMember } from '../householddetails/householddetails.component';
+import { FamilyMember, GoodType } from '../householddetails/householddetails.component';
 
 @Component({
     selector: 'householdlist',
@@ -66,6 +66,7 @@ export class Household {
     name: string;
     code: string;
     familyMembers: Array<FamilyMember> | null;
+    goodTypes: Array<GoodType> | null;
 
     constructor() {
 
@@ -73,6 +74,7 @@ export class Household {
         this.name = "";
         this.code = "";
         this.familyMembers = null;
+        this.goodTypes = null;
     }
 
     public from(household: Household) {
@@ -86,7 +88,15 @@ export class Household {
 
     public loadFamilyMembers(http: Http, baseUrl: string) {
         http.get(baseUrl + 'api/Household/ListFamilyMembers/' + this.id).subscribe(result => {
-            this.familyMembers = result.json() as FamilyMember[];
+            var temp_arr = result.json() as any[];
+            this.familyMembers = temp_arr.map(input => new FamilyMember().from(input));
+        });
+    }
+
+    public loadGoodTypes(http: Http, baseUrl: string) {
+        http.get(baseUrl + 'api/Household/ListGoodTypes/' + this.id).subscribe(result => {
+            var temp_arr = result.json() as any[];
+            this.goodTypes = temp_arr.map(input => new GoodType().from(input));
         });
     }
 }
