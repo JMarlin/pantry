@@ -68,7 +68,7 @@ export class HouseholdDetailsComponent {
         this.initNewFamilyMember();
     }
 
-    public requestCreateFamilyMember() {
+    public requestCreateGoodType() {
         
         this.http.put(this.baseUrl + 'api/Household/AddGoodType/' + this.household_id, this.newGoodType).subscribe(result => {
             this.household.loadGoodTypes(this.http, this.baseUrl);
