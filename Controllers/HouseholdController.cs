@@ -21,7 +21,7 @@ namespace pantry.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IEnumerable<Models.FamilyMember> ListGoodTypes(int id)
+        public IEnumerable<Models.GoodType> ListGoodTypes(int id)
         {
 
             var db = new Models.PantryDBContext();
