@@ -24,6 +24,7 @@ export class HouseholdDetailsComponent {
 
         this.http = http;
         this.baseUrl = baseUrl;
+        this.household = new Household();
     }
 
     ngOnInit() {
