@@ -31,6 +31,7 @@ export class HouseholdDetailsComponent {
             this.household_id = +params['id'];
 
             this.initNewFamilyMember();
+            this.initNewGoodType();
             this.loadHouseholdDetails();
         });
     }
