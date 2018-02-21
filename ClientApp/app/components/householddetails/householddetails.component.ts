@@ -95,7 +95,7 @@ export class GoodType {
     constructor() {
         this.id = 0;
         this.name = "";
-        this.defaultmeasure = "";
+        this.defaultMeasure = "";
     }
 
     public from(input: any) {
