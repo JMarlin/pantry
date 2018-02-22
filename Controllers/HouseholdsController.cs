@@ -47,6 +47,7 @@ namespace pantry.Controllers
             
             //Make sure to remove the pantry and all of its goods as well as the
             //household's settings
+            db.Households.Where(h => h.id == id).FirstOrDefault().Delete(db);
             db.GoodTypes.RemoveRange(db.GoodTypes.Where(gt => gt.HouseholdId == id));
             db.Households.RemoveRange(db.Households.Where(h => h.id == id));
             db.SaveChanges();
