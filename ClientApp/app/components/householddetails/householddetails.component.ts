@@ -13,9 +13,9 @@ export class HouseholdDetailsComponent {
 
     //public household: HouseholdListComponent.Household;
     public household: Household;
-    public newFamilyMember: FamilyMember;
-    public newGoodType: GoodType;
-    private household_id: number;
+    public newFamilyMember: FamilyMember = new FamilyMember();
+    public newGoodType: GoodType = new GoodType();
+    private household_id: number = 0;
     private http: Http;
     private baseUrl: string;
     private sub: any;
@@ -90,7 +90,7 @@ export class HouseholdDetailsComponent {
 export class GoodType {
     id: number;
     name: string;
-    defaultmeasure: string;
+    defaultMeasure: string;
 
     constructor() {
         this.id = 0;
@@ -102,7 +102,7 @@ export class GoodType {
 
         this.id = input.id;
         this.name = input.name;
-        this.defaultmeasure = input.defaultmeasure;
+        this.defaultMeasure = input.defaultMeasure;
 
         return this;
     }

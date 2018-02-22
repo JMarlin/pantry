@@ -9,8 +9,8 @@ import { FamilyMember, GoodType } from '../householddetails/householddetails.com
 })
 export class HouseholdListComponent {
 
-    public households: Household[];
-    public newHousehold: Household;
+    public households: Household[] = [];
+    public newHousehold: Household = new Household();
     private http: Http;
     private baseUrl: string;
 

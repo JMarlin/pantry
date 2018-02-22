@@ -34,9 +34,8 @@ namespace pantry.Controllers
         {
 
             var db = new Models.PantryDBContext();
-            db.Households.Add(household);
-            db.SaveChanges();
-
+            household.DoFirstTimeInit(db);
+            
             return Ok();
         }
 
@@ -45,6 +44,10 @@ namespace pantry.Controllers
         {
 
             var db = new Models.PantryDBContext();
+            
+            //Make sure to remove the pantry and all of its goods as well as the
+            //household's settings
+            db.GoodTypes.RemoveRange(db.GoodTypes.Where(gt => gt.HouseholdId == id));
             db.Households.RemoveRange(db.Households.Where(h => h.id == id));
             db.SaveChanges();
 
