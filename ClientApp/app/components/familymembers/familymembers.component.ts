@@ -18,7 +18,6 @@ export class FamilyMembersComponent {
     private http: Http;
     private baseUrl: string;
 
-
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string, private route: ActivatedRoute) {
 
         this.globals = Global.s;

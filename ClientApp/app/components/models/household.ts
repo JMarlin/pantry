@@ -6,16 +6,16 @@ export class Household {
     id: number;
     name: string;
     code: string;
-    familyMembers: Array<FamilyMember> | null;
-    goodTypes: Array<GoodType> | null;
+    familyMembers: Array<FamilyMember>;
+    goodTypes: Array<GoodType>;
 
     constructor() {
 
         this.id = 0;
         this.name = "";
         this.code = "";
-        this.familyMembers = null;
-        this.goodTypes = null;
+        this.familyMembers = [];
+        this.goodTypes = [];
     }
 
     public from(household: Household) {
