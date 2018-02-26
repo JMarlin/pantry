@@ -39,7 +39,7 @@ namespace pantry.Models {
             db.SaveChanges();
         }
 
-        public IEnumarable<GoodBag> GetPantry(PantryDBContext db) {
+        public IEnumerable<GoodBag> GetPantry(PantryDBContext db) {
 
             return db.GoodBags.Where(gb => gb.id == this.PantryId);
         }
