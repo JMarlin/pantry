@@ -23,8 +23,5 @@ namespace pantry.Models {
 
         [Column("householdid")]
         public int HouseholdId { get; set; }
-
-        [ForeignKey("HouseholdId")]
-        public Household Household { get; set; }
     }
 }

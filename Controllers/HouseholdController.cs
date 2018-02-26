@@ -16,8 +16,9 @@ namespace pantry.Controllers
         {
 
             var db = new Models.PantryDBContext();
+            var household = new Household(id);
 
-            return db.FamilyMembers.Where(fm => fm.HouseholdId == id);
+            return household.GetFamilyMembers(db);
         }
 
         [HttpGet("[action]/{id}")]
@@ -25,23 +26,19 @@ namespace pantry.Controllers
         {
 
             var db = new Models.PantryDBContext();
+            var household = new Household(id);
 
-            return db.GoodTypes.Where(gt => gt.HouseholdId == id);
+            return household.GetGoodTypes(db);
         }
 
         [HttpPut("[action]/{id}")]
         public IActionResult AddFamilyMember(int id, [FromBody] Models.FamilyMember family_member)
         {
+
             var db = new Models.PantryDBContext();
-            var households = db.Households.Where(h => h.id == id);
+            var household = new Household(id);
 
-            if(households.Count() < 1)
-                return NotFound();
-
-            family_member.HouseholdId = id;
-            family_member.Household = households.First();
-            db.FamilyMembers.Add(family_member);
-            db.SaveChanges();
+            household.AddFamilyMember(db, family_member);
 
             return Ok();
         }
@@ -50,15 +47,9 @@ namespace pantry.Controllers
         public IActionResult AddGoodType(int id, [FromBody] Models.GoodType good_type)
         {
             var db = new Models.PantryDBContext();
-            var households = db.Households.Where(h => h.id == id);
+            var household = new Houseold(id);
 
-            if(households.Count() < 1)
-                return NotFound();
-
-            good_type.HouseholdId = id;
-            good_type.Household = households.First();
-            db.GoodTypes.Add(good_type);
-            db.SaveChanges();
+            household.AddGoodType(db, good_type);
 
             return Ok();
         }
@@ -68,9 +59,9 @@ namespace pantry.Controllers
         {
 
             var db = new Models.PantryDBContext();
-            db.FamilyMembers
-              .RemoveRange(db.FamilyMembers.Where(m => m.id == id));
-            db.SaveChanges();
+            var household = new Household(0);
+
+            household.DeleteFamilyMemberById(db, id);
 
             return Ok();
         }
