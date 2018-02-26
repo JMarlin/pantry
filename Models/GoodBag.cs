@@ -20,7 +20,7 @@ namespace pantry.Models {
         [Column("name")]
         public int Name { get; set; }
 
-        public void DoFirstTimeInit(PantryDBContext db, int household_id) {
+        public void DoFirstTimeInit(PantryDBContext db) {
 
             db.GoodBags.Add(this);
             db.SaveChanges();

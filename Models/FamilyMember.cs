@@ -23,5 +23,11 @@ namespace pantry.Models {
 
         [Column("householdid")]
         public int HouseholdId { get; set; }
+
+        public void Delete(PantryDBContext db) {
+
+            db.AppSettingses.Remove(this);
+            db.SaveChanges();
+        }
     }
 }

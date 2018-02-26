@@ -29,18 +29,21 @@ namespace pantry.Models {
         public void DoFirstTimeInit(PantryDBContext db, int household_id) {
 
             var pantry = new GoodBag();
-            pantry.DoFirstTimeInit(db);
+            pantry.DoFirstTimeInit(db, household_id);
 
             this.ShoppingDay = 0;
             this.PantryId = pantry.id;
             this.HouseholdId = household_id;
 
-            db.AppSettings.Add(this);
+            db.AppSettingses.Add(this);
             db.SaveChanges();
         }
 
         public void Delete(PantryDBContext db) {
 
+            foreach(GoodBag good_bag in this.GetGoodBag())
+                good_bag.Delete(db);
+            
             db.AppSettingses.Remove(this);
             db.SaveChanges();
         }

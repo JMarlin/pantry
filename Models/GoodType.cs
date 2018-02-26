@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,5 +24,12 @@ namespace pantry.Models {
 
         [Column("householdid")]
         public int HouseholdId { get; set; }
+
+        public void Delete(PantryDBContext db) {
+
+            //Need to also delete all instances of this type later
+            db.AppSettingses.Remove(this);
+            db.SaveChanges();
+        }
     }
 }

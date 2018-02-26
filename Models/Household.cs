@@ -42,15 +42,15 @@ namespace pantry.Models {
 
         public void AddFamilyMember(PantryDBContext db, FamilyMember new_family_member) {
 
-            family_member.HouseholdId = this.id;
-            db.FamilyMembers.Add(family_member);
+            new_family_member.HouseholdId = this.id;
+            db.FamilyMembers.Add(new_family_member);
             db.SaveChanges();
         }
 
         public void AddGoodType(PantryDBContext db, GoodType new_good_type) {
 
-            good_type.HouseholdId = this.id;
-            db.GoodTypes.Add(good_type);
+            new_good_type.HouseholdId = this.id;
+            db.GoodTypes.Add(new_good_type);
             db.SaveChanges();
         }
 
