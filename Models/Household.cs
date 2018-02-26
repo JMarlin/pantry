@@ -21,6 +21,8 @@ namespace pantry.Models {
         [Column("code")]
         public string Code { get; set; }
 
+        public Household() {}
+
         public Household(int new_id) {
 
             this.id = new_id;
