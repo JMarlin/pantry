@@ -1,0 +1,56 @@
+<h1 *ngIf="globals.household.id !== 0">{{ globals.household.name }} Household Good Types</h1>
+
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Measure</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let goodtype of globals.household.goodTypes">
+            <td>{{ goodtype.name }}</td>
+            <td>{{ goodtype.defaultMeasure }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<input class="household-input"
+        type="text"
+        [(ngModel)]="newGoodType.name"
+        placeholder="New Good Type Name" />
+<input class="household-input" 
+        type="text"
+        [(ngModel)]="newGoodType.defaultMeasure"
+        placeholder="New Good Type Measure Unit" />
+<input class="household-input" 
+        type="button"
+        (click)="requestCreateGoodType()"
+        value="Add Good Type" />
+
+<!-- Make this a paged interface 
+<h2>Pantry</h2>
+<table class='table'>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of household.pantry.items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}{{ item.measure }}</td>
+            <td>{{ familyMember.lastName }}</td>
+            <td>
+                <input class="household-input"
+                        type="button"
+                        (click)="updateItemQuantity(item.id, 0)"
+                        value = "Delete" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+-->

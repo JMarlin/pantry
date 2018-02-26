@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Household } from '../models/household';
 import { FamilyMember } from '../models/familymember';
 import { GoodType } from '../models/goodtype';
-
+import * as Global from '../globals';
 
 @Component({
     selector: 'householdlist',
@@ -16,9 +16,11 @@ export class HouseholdListComponent {
     public newHousehold: Household = new Household();
     private http: Http;
     private baseUrl: string;
+    public globals: Global.GlobalSettings;
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
 
+        this.globals = Global.s;
         this.http = http;
         this.baseUrl = baseUrl;
         this.initNewHousehold();
@@ -30,6 +32,11 @@ export class HouseholdListComponent {
         this.http.get(this.baseUrl + 'api/Households/List').subscribe(result => {
             this.households = result.json() as Household[];
         }, error => console.error(error));
+    }
+
+    public setActiveHousehold(household: Household) {
+
+        this.globals.household = household;
     }
 
     private initNewHousehold() {

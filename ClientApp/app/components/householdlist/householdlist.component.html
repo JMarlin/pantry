@@ -13,8 +13,14 @@
     </thead>
     <tbody>
         <tr *ngFor="let household of households">
-            <td>{{ household.id }}</td>
-            <td><a [routerLink]="['/household-details', household.id]">{{ household.name }}</a></td>
+            <td>
+                <b *ngIf="household.id == globals.household.id">*</b>
+                <input class="household-input"
+                       type="button"
+                       (click)="setActiveHousehold(household)"
+                       *ngValue="household.id" />
+            </td>
+            <td>{{ household.name }}</td>
             <td>{{ household.code }}</td>
             <td>
                 <input class="household-input"

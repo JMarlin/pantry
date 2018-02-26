@@ -6,34 +6,28 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
 import { HouseholdListComponent } from './components/householdlist/householdlist.component';
-import { HouseholdDetailsComponent } from './components/householddetails/householddetails.component';
+import { FamilyMembersComponent } from './components/familymembers/familymembers.component';
+import { GoodTypesComponent } from './components/goodtypes/goodtypes.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
-        HomeComponent,
         HouseholdListComponent,
-        HouseholdDetailsComponent
+        FamilyMembersComponent,
+        GoodTypesComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: '', redirectTo: 'households', pathMatch: 'full' },
             { path: 'households', component: HouseholdListComponent },
-            { path: 'household-details/:id', component: HouseholdDetailsComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: 'family-members', component: FamilyMembersComponent },
+            { path: 'good-types', component: GoodTypesComponent },
+            { path: '**', redirectTo: 'households' }
         ])
     ]
 })
