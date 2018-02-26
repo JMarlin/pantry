@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import { Household } from '../householdlist/householdlist.component';
-
+import { Household } from '../models/household';
+import { FamilyMember } from '../models/familymember';
+import { GoodType } from '../models/goodtype';
 
 @Component({
     selector: 'householddetails',
@@ -62,69 +63,20 @@ export class HouseholdDetailsComponent {
 
     public requestCreateFamilyMember() {
 
-        //Link newHousehold to the UI and send its info off to api/Households/Add
-        this.http.put(this.baseUrl + 'api/Household/AddFamilyMember/' + this.household_id, this.newFamilyMember).subscribe(result => {
-            this.household.loadFamilyMembers(this.http, this.baseUrl);
-        }, error => console.error(error));
-
+        this.household.addFamilyMember(this.http, this.baseUrl, this.newFamilyMember, true);
         this.initNewFamilyMember();
     }
 
     public requestCreateGoodType() {
         
-        this.http.put(this.baseUrl + 'api/Household/AddGoodType/' + this.household_id, this.newGoodType).subscribe(result => {
-            this.household.loadGoodTypes(this.http, this.baseUrl);
-        }, error => console.error(error));
-
+        this.household.addGoodType(this.http, this.baseUrl, this.newGoodType, true);
         this.initNewGoodType();
     }
 
     public requestDeleteFamilyMember(family_member: FamilyMember) {
 
-        this.http.delete(this.baseUrl + 'api/Household/DeleteFamilyMember/' + family_member.id).subscribe(result => {
-            this.household.loadFamilyMembers(this.http, this.baseUrl);
-        }, error => console.error(error));
+        this.household.deleteFamilyMember(this.http, this.baseUrl, family_member, true);
     }
 }
 
-export class GoodType {
-    id: number;
-    name: string;
-    defaultMeasure: string;
 
-    constructor() {
-        this.id = 0;
-        this.name = "";
-        this.defaultMeasure = "";
-    }
-
-    public from(input: any) {
-
-        this.id = input.id;
-        this.name = input.name;
-        this.defaultMeasure = input.defaultMeasure;
-
-        return this;
-    }
-}
-
-export class FamilyMember {
-    id: number;
-    firstName: string;
-    lastName: string;
-
-    constructor() {
-        this.id = 0;
-        this.firstName = "";
-        this.lastName = "";
-    }
-
-    public from(input: any) {
-
-        this.id = input.id;
-        this.firstName = input.firstName;
-        this.lastName = input.lastName;
-
-        return this;
-    }
-}

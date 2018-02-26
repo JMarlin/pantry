@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { FamilyMember, GoodType } from '../householddetails/householddetails.component';
+import { Household } from '../models/household';
+import { FamilyMember } from '../models/familymember';
+import { GoodType } from '../models/goodtype';
+
 
 @Component({
     selector: 'householdlist',
@@ -61,42 +64,3 @@ export class HouseholdListComponent {
     }
 }
   
-export class Household {
-    id: number;
-    name: string;
-    code: string;
-    familyMembers: Array<FamilyMember> | null;
-    goodTypes: Array<GoodType> | null;
-
-    constructor() {
-
-        this.id = 0;
-        this.name = "";
-        this.code = "";
-        this.familyMembers = null;
-        this.goodTypes = null;
-    }
-
-    public from(household: Household) {
-
-        this.id = household.id;
-        this.name = household.name;
-        this.code = household.code;
-
-        return this;
-    }
-
-    public loadFamilyMembers(http: Http, baseUrl: string) {
-        http.get(baseUrl + 'api/Household/ListFamilyMembers/' + this.id).subscribe(result => {
-            var temp_arr = result.json() as any[];
-            this.familyMembers = temp_arr.map(input => new FamilyMember().from(input));
-        });
-    }
-
-    public loadGoodTypes(http: Http, baseUrl: string) {
-        http.get(baseUrl + 'api/Household/ListGoodTypes/' + this.id).subscribe(result => {
-            var temp_arr = result.json() as any[];
-            this.goodTypes = temp_arr.map(input => new GoodType().from(input));
-        });
-    }
-}
