@@ -55,14 +55,14 @@ namespace pantry.Controllers
             return Ok();
         }
 
-        [HttpDelete("[action]/{id}")]
-        public IActionResult DeleteFamilyMember(int id)
+        [HttpDelete("[action]/{household_id}/{family_member_id}")]
+        public IActionResult DeleteFamilyMember(int household_id, int family_member_id)
         {
 
             var db = new Models.PantryDBContext();
-            var household = new Household(0);
+            var household = new Household(0household_id);
 
-            household.DeleteFamilyMemberById(db, id);
+            household.DeleteFamilyMemberById(db, family_member_id );
 
             return Ok();
         }

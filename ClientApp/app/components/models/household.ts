@@ -64,7 +64,7 @@ export class Household {
 
     public deleteFamilyMember(http: Http, baseUrl: string, family_member: FamilyMember, reload_from_server: boolean) {
 
-        http.delete(baseUrl + 'api/Household/DeleteFamilyMember/' + family_member.id).subscribe(result => {
+        http.delete(baseUrl + 'api/Household/DeleteFamilyMember/' + this.id + '/' + family_member.id).subscribe(result => {
 
             if(reload_from_server)
                 this.loadFamilyMembers(http, baseUrl);
