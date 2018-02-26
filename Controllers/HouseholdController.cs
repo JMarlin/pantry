@@ -48,7 +48,7 @@ namespace pantry.Controllers
         public IActionResult AddGoodType(int id, [FromBody] Models.GoodType good_type)
         {
             var db = new Models.PantryDBContext();
-            var household = new Houseold(id);
+            var household = new Household(id);
 
             household.AddGoodType(db, good_type);
 

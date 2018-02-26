@@ -29,7 +29,7 @@ namespace pantry.Models {
         public void DoFirstTimeInit(PantryDBContext db, int household_id) {
 
             var pantry = new GoodBag();
-            pantry.DoFirstTimeInit(db, household_id);
+            pantry.DoFirstTimeInit(db);
 
             this.ShoppingDay = 0;
             this.PantryId = pantry.id;
@@ -39,10 +39,15 @@ namespace pantry.Models {
             db.SaveChanges();
         }
 
+        public IEnumarable<GoodBag> GetPantry(PantryDBContext db) {
+
+            return db.GoodBags.Where(gb => gb.id == this.PantryId);
+        }
+
         public void Delete(PantryDBContext db) {
 
-            foreach(GoodBag good_bag in this.GetGoodBag())
-                good_bag.Delete(db);
+            foreach(GoodBag pantry in this.GetPantry(db))
+                pantry.Delete(db);
             
             db.AppSettingses.Remove(this);
             db.SaveChanges();

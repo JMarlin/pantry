@@ -26,7 +26,7 @@ namespace pantry.Models {
 
         public void Delete(PantryDBContext db) {
 
-            db.AppSettingses.Remove(this);
+            db.FamilyMembers.Remove(this);
             db.SaveChanges();
         }
     }

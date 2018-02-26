@@ -28,7 +28,7 @@ namespace pantry.Models {
         public void Delete(PantryDBContext db) {
 
             //Need to also delete all instances of this type later
-            db.AppSettingses.Remove(this);
+            db.GoodTypes.Remove(this);
             db.SaveChanges();
         }
     }
