@@ -18,7 +18,7 @@
                 <input class="household-input"
                        type="button"
                        (click)="setActiveHousehold(household)"
-                       *ngValue="household.id" />
+                       value="{{ household.id }}" />
             </td>
             <td>{{ household.name }}</td>
             <td>{{ household.code }}</td>

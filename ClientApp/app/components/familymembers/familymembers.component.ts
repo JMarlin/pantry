@@ -33,21 +33,10 @@ export class FamilyMembersComponent {
         this.newFamilyMember = new FamilyMember();
     }
 
-    private initNewGoodType() {
-
-        this.newGoodType = new GoodType();
-    }
-
     public requestCreateFamilyMember() {
 
         Global.s.household.addFamilyMember(this.http, this.baseUrl, this.newFamilyMember, true);
         this.initNewFamilyMember();
-    }
-
-    public requestCreateGoodType() {
-        
-        Global.s.household.addGoodType(this.http, this.baseUrl, this.newGoodType, true);
-        this.initNewGoodType();
     }
 
     public requestDeleteFamilyMember(family_member: FamilyMember) {
