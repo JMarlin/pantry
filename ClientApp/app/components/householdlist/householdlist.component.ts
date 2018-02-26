@@ -30,7 +30,8 @@ export class HouseholdListComponent {
     private refreshHouseholdList() {
 
         this.http.get(this.baseUrl + 'api/Households/List').subscribe(result => {
-            this.households = result.json() as Household[];
+            var temp_arr = result.json() as any[];
+            this.households = temp_arr.map(input => new Household().from(input));
         }, error => console.error(error));
     }
 
