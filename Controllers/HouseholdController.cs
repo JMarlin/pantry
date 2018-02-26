@@ -60,7 +60,7 @@ namespace pantry.Controllers
         {
 
             var db = new Models.PantryDBContext();
-            var household = new Household(0household_id);
+            var household = new Household(household_id);
 
             household.DeleteFamilyMemberById(db, family_member_id );
 
